@@ -1,0 +1,1 @@
+# lógica de clima será implementada depois
