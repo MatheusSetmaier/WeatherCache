@@ -1,1 +1,0 @@
-# conexão com redis será implementada depois
