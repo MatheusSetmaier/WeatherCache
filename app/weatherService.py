@@ -15,21 +15,42 @@ def get_weather(cidade: str):
     if cache:
         print('Dados retirados do cache')
         return json.loads(cache)
+
     print('Dados retirados da API')
 
     url = (
-        f"https://weather.visualcrossing.com/"
-        f"VisualCrossingWebServices/rest/services/timeline/"
-        f"{cidade}?key={API_KEY}"
+        f'https://weather.visualcrossing.com/'
+        f'VisualCrossingWebServices/rest/services/timeline/'
+        f'{cidade}?key={API_KEY}'
     )
 
     response = requests.get(url)
 
     dados = response.json()
 
+    traducao = {
+    'Overcast': 'Nublado',
+    'Clear': 'Céu limpo',
+    'Partially cloudy': 'Parcialmente nublado',
+    'Rain': 'Chuva',
+    'Snow': 'Neve'
+}
+    
+    resultado = {
+    'cidade': dados['resolvedAddress'],
+    'temperatura': dados['currentConditions']['temp'],
+    'sensacao_termica': dados['currentConditions']['feelslike'],
+    'umidade': dados['currentConditions']['humidity'],
+    'condicao': traducao.get(
+        dados['currentConditions']['conditions'],
+        dados['currentConditions']['conditions']
+    )
+}
+
     redis_client.set(
-        cidade,json.dumps(dados),
+        cidade,
+        json.dumps(resultado),
         ex = 43200
     )
 
-    return dados
+    return resultado
