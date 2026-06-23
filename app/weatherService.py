@@ -21,7 +21,7 @@ def get_weather(cidade: str):
     url = (
         f'https://weather.visualcrossing.com/'
         f'VisualCrossingWebServices/rest/services/timeline/'
-        f'{cidade}?key={API_KEY}'
+        f'{cidade}?unitGroup=metric&key={API_KEY}'
     )
 
     response = requests.get(url)

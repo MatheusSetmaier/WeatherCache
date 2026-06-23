@@ -8,8 +8,8 @@ async function buscarClima() {
 
     document.getElementById('resultado').innerHTML = `
         <h2>${dados.cidade}</h2>
-        <p>Temperatura: ${dados.temperatura}°</p>
-        <p>Sensação térmica: ${dados.sensacao_termica}°</p>
+        <p>Temperatura: ${dados.temperatura}°C</p>
+        <p>Sensação térmica: ${dados.sensacao_termica}°C</p>
         <p>Umidade: ${dados.umidade}%</p>
         <p>Condição: ${dados.condicao}</p>
     `
