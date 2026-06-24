@@ -8,11 +8,9 @@ app = FastAPI()
 
 app.mount('/static', StaticFiles(directory = 'static'), name = 'static')
 
-
 @app.get('/')
 def home():
     return FileResponse('static/index.html')
-
 
 @app.get('/weather/{cidade}')
 def buscarClima(cidade: str):
