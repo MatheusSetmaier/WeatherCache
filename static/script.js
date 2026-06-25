@@ -12,6 +12,8 @@ async function buscarClima() {
         return
     }
 
+    resultado.innerHTML = '<p>Carregando...</p>'
+
     const resposta = await fetch(`/weather/${cidade}`)
     const dados = await resposta.json()
 
