@@ -10,6 +10,8 @@ API_KEY = os.getenv('WEATHER_API_KEY')
 
 def get_weather(cidade: str):
 
+    cidade = cidade.strip().lower()
+
     cache = redis_client.get(cidade)
 
     if cache:
@@ -26,26 +28,31 @@ def get_weather(cidade: str):
 
     response = requests.get(url)
 
-    dados = response.json()
+    try:
+        dados = response.json()
+    except Exception:
+        return {
+            'erro': 'Cidade não encontrada'
+        }
 
     traducao = {
-    'Overcast': 'Nublado',
-    'Clear': 'Céu limpo',
-    'Partially cloudy': 'Parcialmente nublado',
-    'Rain': 'Chuva',
-    'Snow': 'Neve'
-}
-    
+        'Overcast': 'Nublado',
+        'Clear': 'Céu limpo',
+        'Partially cloudy': 'Parcialmente nublado',
+        'Rain': 'Chuva',
+        'Snow': 'Neve'
+    }
+
     resultado = {
-    'cidade': dados['resolvedAddress'],
-    'temperatura': dados['currentConditions']['temp'],
-    'sensacao_termica': dados['currentConditions']['feelslike'],
-    'umidade': dados['currentConditions']['humidity'],
-    'condicao': traducao.get(
-        dados['currentConditions']['conditions'],
-        dados['currentConditions']['conditions']
-    )
-}
+        'cidade': dados['resolvedAddress'].title(),
+        'temperatura': dados['currentConditions']['temp'],
+        'sensacao_termica': dados['currentConditions']['feelslike'],
+        'umidade': dados['currentConditions']['humidity'],
+        'condicao': traducao.get(
+            dados['currentConditions']['conditions'],
+            dados['currentConditions']['conditions']
+        )
+    }
 
     redis_client.set(
         cidade,
