@@ -30,3 +30,13 @@ async function buscarClima() {
         <p>Condição: ${dados.condicao}</p>
     `
 }
+
+document
+    .getElementById('cidade')
+    .addEventListener('keypress', function(event) {
+
+        if (event.key === 'Enter') {
+            buscarClima()
+        }
+
+    })
