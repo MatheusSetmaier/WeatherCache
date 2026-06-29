@@ -1,29 +1,57 @@
 <!DOCTYPE html>
 <html lang = 'pt-BR'>
+
 <head>
+
     <meta charset = 'UTF-8'>
+    <meta name = 'viewport' content = 'width=device-width, initial-scale=1.0'>
+
     <title>Meteora</title>
+
     <link rel = 'stylesheet' href = '/static/style.css'>
+
+    <link href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap' rel = 'stylesheet'>
+
 </head>
+
 <body>
 
-    <div class = 'container'>
-        <h1>Meteora</h1>
+<div class = 'container'>
+
+    <h1>Meteora</h1>
+
+    <div class = 'search'>
 
         <input
             type = 'text'
             id = 'cidade'
-            placeholder = 'Digite uma cidade'
-        >
+            placeholder = 'Digite uma cidade'>
 
-        <button onclick = 'buscarClima()''>
+        <button onclick = 'buscarClima()'>
             Buscar
         </button>
 
-        <div id = 'resultado'></div>
     </div>
 
-    <script src = '/static/script.js'></script>
+    <div id = 'resultado'>
+
+        <div class = 'placeholder'>
+
+            <div class = 'emoji'>🌤️</div>
+
+            <p>
+                Pesquise uma cidade para visualizar
+                as informações meteorológicas.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src = '/static/script.js'></script>
 
 </body>
+
 </html>
